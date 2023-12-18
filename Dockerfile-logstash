@@ -1,0 +1,4 @@
+FROM docker.elastic.co/logstash/logstash:7.15.2
+
+# Copy Logstash configuration file to the container
+COPY logstash.conf /usr/share/logstash/pipeline/logstash.conf

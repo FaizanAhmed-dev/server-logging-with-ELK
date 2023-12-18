@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.2
+    environment:
+      - discovery.type=single-node
+
+  logstash:
+    build:
+      context: .
+      dockerfile: Dockerfile-logstash
+    ports:
+      - "5000:5000"
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.15.2
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
